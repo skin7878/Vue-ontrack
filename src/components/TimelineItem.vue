@@ -1,29 +1,26 @@
 <template>
   <li class="relative flex flex-col gap-2 border-t border-gray-200 py-10 px-4">
-    <a :class="hourLinkClasses">{{ timelineItem.hour }}:00</a>
-    <BaseSelect :options="options" placeholder="Rest" :is-available-id="isAvailableId" />
+    <TimelineHour :hour="timelineItem.hour" />
+    <BaseSelect
+      :options="options"
+      placeholder="Rest"
+      :selected="selectedActivityId"
+      @select="select($event)"
+    />
   </li>
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue'
+import { ref } from 'vue'
 import type { ITimelineItem, IOption } from '../types'
 import BaseSelect from './BaseSelect.vue'
+import TimelineHour from './TimelineHour.vue'
 
 interface IProps {
   timelineItem: ITimelineItem
 }
 
-const props = defineProps<IProps>()
-const { timelineItem } = toRefs(props)
-
-const hourLinkClasses = [
-  'absolute -top-4 left-1/2 -translate-x-1/2 rounded bg-gray-200 px-2 font-mono text-lg',
-
-  timelineItem.value.hour === new Date().getHours()
-    ? 'bg-purple-900 font-black text-white'
-    : 'bg-gray-100 text-gray-500'
-]
+defineProps<IProps>()
 
 const options: IOption[] = [
   { value: 1, label: 'Coding' },
@@ -31,5 +28,9 @@ const options: IOption[] = [
   { value: 3, label: 'Training' }
 ]
 
-const isAvailableId = 3
+const selectedActivityId = ref<number | null>(null)
+
+const select = (value: number | null): void => {
+  selectedActivityId.value = value
+}
 </script>
