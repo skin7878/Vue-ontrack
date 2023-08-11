@@ -18,3 +18,5 @@ export interface IOption {
   value: number
   label: string
 }
+
+export type Activities = 'Coding' | 'Reading' | 'Training'

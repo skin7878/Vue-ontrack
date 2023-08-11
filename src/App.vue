@@ -14,13 +14,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { PageNames } from './types'
-import TheHeader from './components/TheHeader.vue'
-import TheNav from './components/TheNav.vue'
-import TheTimeline from './pages/TheTimeline.vue'
-import TheActivities from './pages/TheActivities.vue'
-import TheProgress from './pages/TheProgress.vue'
-import { generateTimelineItems, normalizePageHash } from './functions'
+import { PageNames } from '@/types'
+import TheHeader from '@/components/TheHeader.vue'
+import TheNav from '@/components/TheNav.vue'
+import TheTimeline from '@/pages/TheTimeline.vue'
+import TheActivities from '@/pages/TheActivities.vue'
+import TheProgress from '@/pages/TheProgress.vue'
+import { generateTimelineItems, normalizePageHash } from '@/functions'
 
 const isDayComplete = ref<boolean>(false)
 

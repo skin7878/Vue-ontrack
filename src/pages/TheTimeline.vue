@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import TimelineItem from '../components/TimelineItem.vue'
-import type { ITimelineItem } from '../types'
+import TimelineItem from '@/components/TimelineItem.vue'
+import type { ITimelineItem } from '@/types'
 
 interface IProps {
   timelineItems: ITimelineItem[]

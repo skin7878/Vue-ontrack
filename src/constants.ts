@@ -8,6 +8,10 @@ export const NAV_ITEMS: NavItems = {
   [PageNames.TIMELINE]: ClockIcon,
   [PageNames.ACTIVITIES]: ListBulletIcon,
   [PageNames.PROGRESS]: ChartBarIcon
-}
+} as const
 
 export const HOURS_IN_DAY = 24
+
+export const BUTTON_TYPE_NEUTRAL = 'neutral'
+
+export const BUTTON_TYPE_DANGER = 'danger'

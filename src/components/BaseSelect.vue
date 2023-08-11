@@ -26,7 +26,7 @@ import type { IOption } from '../types'
 interface IProps {
   options: IOption[]
   placeholder: string
-  selected?: number | null
+  selected: number | null
 }
 
 const props = defineProps<IProps>()
