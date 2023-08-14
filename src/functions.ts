@@ -1,5 +1,5 @@
 import { HOURS_IN_DAY } from './constants'
-import type { ITimelineItem } from './types'
+import type { ITimelineItem, Activities } from './types'
 import { PageNames } from './types'
 
 export const generateTimelineItems = (): ITimelineItem[] => {
@@ -21,4 +21,8 @@ export const normalizePageHash = (): string => {
   }
 
   return hash
+}
+
+export const generateActivitySelectOptions = (activities: Activities[]) => {
+  return activities.map((label, value) => ({ label, value }))
 }

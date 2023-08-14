@@ -1,7 +1,7 @@
 <template>
   <li class="flex flex-col gap-2 p-4">
     <div class="flex items-center gap-2">
-      <BaseIconButton :type="BUTTON_TYPE_DANGER">
+      <BaseIconButton :type="BUTTON_TYPE_DANGER" @click="emit('delete')">
         <TrashIcon class="h-8" />
       </BaseIconButton>
       <span class="truncate text-xl">{{ activity }}</span>
@@ -31,6 +31,10 @@ interface IProps {
 }
 
 defineProps<IProps>()
+
+const emit = defineEmits<{
+  (e: 'delete'): void
+}>()
 
 const periodSelectOptions: IOption[] = [
   { value: 15, label: '0:15' },

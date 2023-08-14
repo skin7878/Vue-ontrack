@@ -1,6 +1,11 @@
 <template>
   <ul class="mt-3 divide-y">
-    <ActivityItem v-for="activity in activities" :key="activity" :activity="activity" />
+    <ActivityItem
+      v-for="activity in activities"
+      :key="activity"
+      :activity="activity"
+      @delete="emit('deleteActivity', activity)"
+    />
   </ul>
 </template>
 
@@ -8,5 +13,12 @@
 import ActivityItem from '@/components/ActivityItem.vue'
 import type { Activities } from '@/types'
 
-const activities: Activities[] = ['Coding', 'Reading', 'Training']
+interface IProps {
+  activities: Activities[]
+}
+
+defineProps<IProps>()
+const emit = defineEmits<{
+  (e: 'deleteActivity', value: Activities): void
+}>()
 </script>
