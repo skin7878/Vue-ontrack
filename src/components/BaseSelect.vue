@@ -1,6 +1,6 @@
 <template>
   <div class="flex gap-2">
-    <BaseIconButton @click="resetValue">
+    <BaseIconButton :typeClass="BUTTON_TYPE_NEUTRAL" @click="resetValue">
       <XMarkIcon class="h-8" />
     </BaseIconButton>
     <select class="w-full truncate rounded py-1 px-2 bg-gray-100 text-2xl" @change="updateValue">
@@ -22,6 +22,7 @@ import { computed } from 'vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import BaseIconButton from './BaseIconButton.vue'
 import type { IOption } from '../types'
+import { BUTTON_TYPE_NEUTRAL } from '../constants'
 
 interface IProps {
   options: IOption[]

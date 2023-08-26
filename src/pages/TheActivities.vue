@@ -1,24 +1,36 @@
 <template>
-  <ul class="mt-3 divide-y">
-    <ActivityItem
-      v-for="activity in activities"
-      :key="activity"
-      :activity="activity"
-      @delete="emit('deleteActivity', activity)"
-    />
-  </ul>
+  <div class="flex flex-col grow">
+    <ul v-if="activities.length" class="divide-y grow">
+      <ActivityItem
+        v-for="activity in activities"
+        :key="activity.id"
+        :activity="activity"
+        @delete="emit('deleteActivity', activity)"
+      />
+    </ul>
+    <TheActivitiesEmptyState v-else />
+    <TheActivityForm @add-activity="addActivity" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import ActivityItem from '@/components/ActivityItem.vue'
-import type { Activities } from '@/types'
+import TheActivityForm from '@/components/TheActivityForm.vue'
+import TheActivitiesEmptyState from '@/components/TheActivitiesEmptyState.vue'
+import type { IActivities } from '@/types'
 
 interface IProps {
-  activities: Activities[]
+  activities: IActivities[]
 }
 
 defineProps<IProps>()
+
 const emit = defineEmits<{
-  (e: 'deleteActivity', value: Activities): void
+  (e: 'deleteActivity', value: IActivities): void
+  (e: 'addActivity', value: string): void
 }>()
+
+const addActivity = (value: string) => {
+  emit('addActivity', value)
+}
 </script>

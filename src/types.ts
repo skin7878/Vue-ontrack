@@ -15,8 +15,12 @@ export interface ITimelineItem {
 }
 
 export interface IOption {
-  value: number
+  value: string
   label: string
 }
 
-export type Activities = 'Coding' | 'Reading' | 'Training'
+export interface IActivities {
+  id: string
+  name: string
+  secondsToComplete: number
+}

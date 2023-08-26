@@ -4,7 +4,7 @@
     @goToTimeline="goTo($event)"
     @goToProgress="goTo($event)"
   />
-  <main class="flex-grow">
+  <main class="flex flex-col grow">
     <TheTimeline
       v-show="currentPage === PageNames.TIMELINE"
       :timeline-items="timelineItems"
@@ -14,6 +14,7 @@
       v-show="currentPage === PageNames.ACTIVITIES"
       :activities="activities"
       @delete-activity="deleteActivity"
+      @add-activity="addActivity"
     />
     <TheProgress v-show="currentPage === PageNames.PROGRESS" />
   </main>
@@ -21,8 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { PageNames } from '@/types'
+import type { IActivities } from '@/types'
 import TheHeader from '@/components/TheHeader.vue'
 import TheNav from '@/components/TheNav.vue'
 import TheTimeline from '@/pages/TheTimeline.vue'
@@ -31,9 +33,10 @@ import TheProgress from '@/pages/TheProgress.vue'
 import {
   generateTimelineItems,
   normalizePageHash,
-  generateActivitySelectOptions
+  generateActivitySelectOptions,
+  generateActivities,
+  createId
 } from '@/functions'
-import type { Activities } from '@/types'
 
 const isDayComplete = ref<boolean>(false)
 
@@ -41,12 +44,27 @@ const currentPage = ref<string | number>(normalizePageHash())
 
 const timelineItems = generateTimelineItems()
 
-let activities = ref<Activities[]>(['Coding', 'Reading', 'Training'])
+let activities = ref<IActivities[]>(generateActivities())
 
 const activitySelectOptions = generateActivitySelectOptions(activities.value)
 
-const deleteActivity = (value: Activities) => {
-  activities.value = activities.value.filter((activity) => activity !== value)
+const deleteActivity = (value: IActivities) => {
+  activities.value = activities.value.filter((activity) => activity.id !== value.id)
+}
+
+const addActivity = async (value: string) => {
+  activities.value.push({
+    id: createId(),
+    name: value,
+    secondsToComplete: 0
+  })
+
+  await nextTick()
+
+  window.scrollTo({
+    behavior: 'smooth',
+    top: document.body.scrollHeight
+  })
 }
 
 const goTo = (page: string | number): void => {

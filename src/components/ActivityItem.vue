@@ -1,10 +1,10 @@
 <template>
   <li class="flex flex-col gap-2 p-4">
     <div class="flex items-center gap-2">
-      <BaseIconButton :type="BUTTON_TYPE_DANGER" @click="emit('delete')">
+      <BaseIconButton :typeClass="BUTTON_TYPE_DANGER" @click="emit('delete')">
         <TrashIcon class="h-8" />
       </BaseIconButton>
-      <span class="truncate text-xl">{{ activity }}</span>
+      <span class="truncate text-xl">{{ activity.name }}</span>
     </div>
     <div>
       <BaseSelect
@@ -23,11 +23,11 @@ import { ref } from 'vue'
 import BaseIconButton from './BaseIconButton.vue'
 import BaseSelect from './BaseSelect.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import type { IOption } from '../types'
+import type { IOption, IActivities } from '../types'
 import { BUTTON_TYPE_DANGER } from '../constants'
 
 interface IProps {
-  activity: string
+  activity: IActivities
 }
 
 defineProps<IProps>()
@@ -37,9 +37,9 @@ const emit = defineEmits<{
 }>()
 
 const periodSelectOptions: IOption[] = [
-  { value: 15, label: '0:15' },
-  { value: 30, label: '0:30' },
-  { value: 45, label: '0:45' }
+  { value: '15', label: '0:15' },
+  { value: '30', label: '0:30' },
+  { value: '45', label: '0:45' }
 ]
 
 const secondsToComplete = ref<number | null>(null)
