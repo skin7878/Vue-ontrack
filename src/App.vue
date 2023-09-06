@@ -22,9 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { PageNames } from '@/types'
-import type { IActivities } from '@/types'
+import type { IActivities, IOption } from '@/types'
 import TheHeader from '@/components/TheHeader.vue'
 import TheNav from '@/components/TheNav.vue'
 import TheTimeline from '@/pages/TheTimeline.vue'
@@ -34,8 +34,7 @@ import {
   generateTimelineItems,
   normalizePageHash,
   generateActivitySelectOptions,
-  generateActivities,
-  createId
+  generateActivities
 } from '@/functions'
 
 const isDayComplete = ref<boolean>(false)
@@ -46,18 +45,16 @@ const timelineItems = generateTimelineItems()
 
 let activities = ref<IActivities[]>(generateActivities())
 
-const activitySelectOptions = generateActivitySelectOptions(activities.value)
+const activitySelectOptions = computed((): IOption[] =>
+  generateActivitySelectOptions(activities.value)
+)
 
 const deleteActivity = (value: IActivities) => {
   activities.value = activities.value.filter((activity) => activity.id !== value.id)
 }
 
-const addActivity = async (value: string) => {
-  activities.value.push({
-    id: createId(),
-    name: value,
-    secondsToComplete: 0
-  })
+const addActivity = async (value: IActivities) => {
+  activities.value.push(value)
 
   await nextTick()
 

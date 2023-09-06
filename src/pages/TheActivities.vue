@@ -27,10 +27,10 @@ defineProps<IProps>()
 
 const emit = defineEmits<{
   (e: 'deleteActivity', value: IActivities): void
-  (e: 'addActivity', value: string): void
+  (e: 'addActivity', value: IActivities): void
 }>()
 
-const addActivity = (value: string) => {
+const addActivity = (value: IActivities) => {
   emit('addActivity', value)
 }
 </script>

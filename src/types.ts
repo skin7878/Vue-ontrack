@@ -15,7 +15,7 @@ export interface ITimelineItem {
 }
 
 export interface IOption {
-  value: string
+  value: number | string
   label: string
 }
 

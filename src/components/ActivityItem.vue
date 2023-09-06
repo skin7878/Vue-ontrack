@@ -37,14 +37,14 @@ const emit = defineEmits<{
 }>()
 
 const periodSelectOptions: IOption[] = [
-  { value: '15', label: '0:15' },
-  { value: '30', label: '0:30' },
-  { value: '45', label: '0:45' }
+  { value: 15 * 60, label: '0:15' },
+  { value: 30 * 60, label: '0:30' },
+  { value: 45 * 60, label: '0:45' }
 ]
 
-const secondsToComplete = ref<number | null>(null)
+const secondsToComplete = ref<number | null | string>(null)
 
-const select = (value: number | null): void => {
+const select = (value: number | null | string): void => {
   secondsToComplete.value = value
 }
 </script>

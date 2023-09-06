@@ -23,9 +23,9 @@ interface IProps {
 
 defineProps<IProps>()
 
-const selectedActivityId = ref<number | null>(null)
+const selectedActivityId = ref<number | null | string>(null)
 
-const select = (value: number | null): void => {
+const select = (value: number | null | string): void => {
   selectedActivityId.value = value
 }
 </script>
