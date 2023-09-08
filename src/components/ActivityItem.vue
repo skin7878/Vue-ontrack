@@ -23,11 +23,11 @@ import { ref } from 'vue'
 import BaseIconButton from './BaseIconButton.vue'
 import BaseSelect from './BaseSelect.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import type { IOption, IActivities } from '../types'
+import type { IOption, IActivity } from '../types'
 import { BUTTON_TYPE_DANGER } from '../constants'
 
 interface IProps {
-  activity: IActivities
+  activity: IActivity
 }
 
 defineProps<IProps>()

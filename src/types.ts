@@ -12,6 +12,7 @@ export enum PageNames {
 
 export interface ITimelineItem {
   hour: number
+  activityID: number | null | string
 }
 
 export interface IOption {
@@ -19,8 +20,13 @@ export interface IOption {
   label: string
 }
 
-export interface IActivities {
-  id: string
+export interface IActivity {
+  id: string | string
   name: string
   secondsToComplete: number
+}
+
+export interface ITimeLineItemActivity {
+  timelineItem: ITimelineItem
+  activity: IActivity | undefined
 }

@@ -17,20 +17,20 @@
 import ActivityItem from '@/components/ActivityItem.vue'
 import TheActivityForm from '@/components/TheActivityForm.vue'
 import TheActivitiesEmptyState from '@/components/TheActivitiesEmptyState.vue'
-import type { IActivities } from '@/types'
+import type { IActivity } from '@/types'
 
 interface IProps {
-  activities: IActivities[]
+  activities: IActivity[]
 }
 
 defineProps<IProps>()
 
 const emit = defineEmits<{
-  (e: 'deleteActivity', value: IActivities): void
-  (e: 'addActivity', value: IActivities): void
+  (e: 'deleteActivity', value: IActivity): void
+  (e: 'addActivity', value: IActivity): void
 }>()
 
-const addActivity = (value: IActivities) => {
+const addActivity = (value: IActivity) => {
   emit('addActivity', value)
 }
 </script>

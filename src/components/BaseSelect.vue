@@ -39,7 +39,7 @@ const emit = defineEmits<{
   (e: 'select', value: number | null | string): void
 }>()
 
-const select = <T extends number | null | string>(value: T): void => {
+const select = (value: number | null | string): void => {
   value === null || isNaN(+value) ? emit('select', value) : emit('select', +value)
 }
 

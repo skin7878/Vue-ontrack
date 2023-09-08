@@ -16,11 +16,11 @@
 import { ref } from 'vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import BaseIconButton from '@/components/BaseIconButton.vue'
-import type { IActivities } from '@/types'
+import type { IActivity } from '@/types'
 import { createId } from '@/functions'
 
 const emit = defineEmits<{
-  (e: 'addActivity', value: IActivities): void
+  (e: 'addActivity', value: IActivity): void
 }>()
 
 const name = ref<string>('')
@@ -30,7 +30,7 @@ const submit = () => {
     id: createId(),
     name: name.value,
     secondsToComplete: 0
-  } as IActivities)
+  } as IActivity)
   name.value = ''
 }
 </script>

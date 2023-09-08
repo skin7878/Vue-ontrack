@@ -4,28 +4,33 @@
     <BaseSelect
       :options="activitySelectOptions"
       placeholder="Rest"
-      :selected="selectedActivityId"
-      @select="select($event)"
+      :selected="timelineItem.activityID"
+      @select="selectActivity($event)"
     />
   </li>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { ITimelineItem, IOption } from '../types'
+import type { ITimelineItem, IOption, IActivity } from '../types'
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue'
 
 interface IProps {
   timelineItem: ITimelineItem
   activitySelectOptions: IOption[]
+  activities: IActivity[]
 }
 
-defineProps<IProps>()
+const props = defineProps<IProps>()
 
-const selectedActivityId = ref<number | null | string>(null)
+const emit = defineEmits<{
+  (e: 'selectActivity', value: IActivity | undefined): void
+}>()
 
-const select = (value: number | null | string): void => {
-  selectedActivityId.value = value
+const selectActivity = (id: number | null | string): void => {
+  emit(
+    'selectActivity',
+    props.activities.find((activity) => activity.id === id)
+  )
 }
 </script>
